@@ -25,6 +25,19 @@ public class Board{
 	private String[] colors;
 	private int index;
 
+	public static boolean timeUp = false;
+	public static double timeAllocation[] = {0.015, 0.015, 0.015, 0.015, 0.025, 0.025, 0.025, 0.025, 0.025, 0.025,
+                                    0.048,  0.048, 0.048, 0.048, 0.048, 0.048, 0.050, 0.051, 0.052, 0.053,
+                                    0.044,  0.045, 0.049, 0.049, 0.049, 0.051, 0.053, 0.055, 0.057, 0.059,
+                                    0.060, 0.060, 0.061, 0.062, 0.063, 0.064, 0.065, 0.065, 0.065, 0.065,
+                                    0.167, 0.168, 0.169, 0.169, 0.171, 0.172, 0.173, 0.175, 0.180, 0.180,
+                                    0.181, 0.187, 0.196, 0.199, 0.220, 0.220, 0.220, 0.220, 0.220, 0.220,
+                                    0.220, 0.250, 0.250, 0.250, 0.250, 0.250, 0.250, 0.250, 0.250, 0.250
+                                  };
+    public static int timeRemaining; //declare a variable to keep track of remaining time ..... initialize at beginning of game
+ 	public static Timer timer; //use this to start the interupt task
+  	public static boolean timeUP;  //boolean flag to check frequently for time up....this is set to true in the 
+                                //interrupt task
 	public Board(String color){
 		this.color = color;
 
@@ -246,11 +259,26 @@ public class Board{
 		* check that this works without loop first (just check where it does maxDepth =2 every time)
 		* 
 		*/
+		//moveNumber++;
+        timeUP = false;  //time up is false at the beginning of move
+        timer = new Timer();  //initialize the new timer
+
+        int timeForMove = (int)(timeAllocation[moveNumber]*(double)timeRemaining); 
+         //compute in seconds the amount of time for move
+         //
+      	System.out.print("(C Move Time:  " + timeForMove + ")");
+      	timer.schedule(new InterruptTask(), timeForMove*1000);  //schedule the  interrupt task
+
 		double alpha = Double.MIN_VALUE;
 		double beta = Double.MAX_VALUE;
 		int maxDepth = 4;
 		//Move bestMove = new Move();
 		Move bestMove = alphaBeta(this, 0, 1, alpha, beta, maxDepth);
+		if (!timeUP)
+        	timer.cancel();
+      	timeRemaining -= timeForMove;  //update the time remaining 
+
+      	System.out.print("(C Remaining Time: " + timeRemaining + ")");
 
 		/*
 		while(!OthelloGame.timeUp){
