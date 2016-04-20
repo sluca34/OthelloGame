@@ -286,7 +286,7 @@ public class Board{
       	System.out.println("(C Remaining Time: " + timeRemaining + ")");
 
 		
-		while(!OthelloGame.timeUp){
+		while(!timeUp){
 			Move tempMove = alphaBeta(this, 0, 1, alpha, beta, maxDepth);
 			bestMove = tempMove;
 			maxDepth += 2;
