@@ -28,7 +28,7 @@ public class Board{
 	private int index;
 	private int maxDepth;
 
-	public static boolean timeUp = false;
+	//public static boolean timeUp = false;
 	public static double timeAllocation[] = {0.015, 0.015, 0.015, 0.015, 0.025, 0.025, 0.025, 0.025, 0.025, 0.025,
                                     0.048,  0.048, 0.048, 0.048, 0.048, 0.048, 0.050, 0.051, 0.052, 0.053,
                                     0.044,  0.045, 0.049, 0.049, 0.049, 0.051, 0.053, 0.055, 0.057, 0.059,
@@ -45,7 +45,7 @@ public class Board{
 
 	public Board(String color){
 		this.color = color;
-
+		timeRemaining = 100;
 		for (int i = 0; i<board.length; i++){
 			board[i] = EMPTY;
 		}
@@ -286,8 +286,8 @@ public class Board{
       	System.out.println("(C Remaining Time: " + timeRemaining + ")");
 
 		
-		while(!timeUp){
-			Move tempMove = alphaBeta(this, 0, 1, alpha, beta, maxDepth);
+		while(!timeUP){
+			Move tempMove = alphaBeta(this, 0, ME, alpha, beta, maxDepth);
 			bestMove = tempMove;
 			maxDepth += 2;
 		}

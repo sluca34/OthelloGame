@@ -17,7 +17,6 @@ public class OthelloGame{
 	private Scanner input = new Scanner(System.in);
 	private int index;
 	private String currentColor;
-	public static boolean timeUp = false;
 
 	public OthelloGame(){
 		System.out.println("C Initialize Board: ");
