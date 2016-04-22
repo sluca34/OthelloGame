@@ -28,6 +28,7 @@ public class Board{
 	private int index;
 	private int maxDepth;
 
+<<<<<<< HEAD
 	//public static boolean timeUp = false;
 	public static double timeAllocation[] = {0.015, 0.015, 0.015, 0.015, 0.025, 0.025, 0.025, 0.025, 0.025, 0.025,
                                     0.048,  0.048, 0.048, 0.048, 0.048, 0.048, 0.050, 0.051, 0.052, 0.053,
@@ -43,6 +44,8 @@ public class Board{
                                 //interrupt task
   	public static int moveNumber;
 
+=======
+>>>>>>> parent of 326feb8... added time
 	public Board(String color){
 		this.color = color;
 		timeRemaining = 100;
@@ -264,6 +267,7 @@ public class Board{
 		* check that this works without loop first (just check where it does maxDepth =2 every time)
 		* 
 		*/
+<<<<<<< HEAD
 		moveNumber++;
         timeUP = false;  //time up is false at the beginning of move
         timer = new Timer();  //initialize the new timer
@@ -284,6 +288,13 @@ public class Board{
       	timeRemaining -= timeForMove;  //update the time remaining 
 
       	System.out.println("(C Remaining Time: " + timeRemaining + ")");
+=======
+		double alpha = Double.MIN_VALUE;
+		double beta = Double.MAX_VALUE;
+		int maxDepth = 4;
+		//Move bestMove = new Move();
+		Move bestMove = alphaBeta(this, 0, 1, alpha, beta, maxDepth);
+>>>>>>> parent of 326feb8... added time
 
 		
 		while(!timeUP){
